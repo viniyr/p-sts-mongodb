@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.viniweb.wksmongo.domain.Post;
 import com.viniweb.wksmongo.domain.User;
+import com.viniweb.wksmongo.dto.AuthorDTO;
 import com.viniweb.wksmongo.repository.PostRepository;
 import com.viniweb.wksmongo.repository.UserRepository;
 
@@ -35,10 +36,11 @@ public class Instantiation implements CommandLineRunner {
 		User mike = new User(null, "Michael Scott", "dundermifflin@gmail.com");
 		User dwight = new User(null, "Dwight Schrute", "dwights@gmail.com");
 
-		Post post1 = new Post(null, sdf.parse("22/03/2021"), "Meu aniversário!!", "Muito feliz pelo dia de hoje :D ", vini);
-		Post post2 = new Post(null, sdf.parse("01/03/2021"), "Comprei essa camiseta", "Um achado essa camiseta, vai ficar bonito nela.", vini);
-		
 		userRepository.saveAll(Arrays.asList(vini, mike, dwight));
+		
+		Post post1 = new Post(null, sdf.parse("22/03/2021"), "Meu aniversário!!", "Muito feliz pelo dia de hoje :D ", new AuthorDTO(vini));
+		Post post2 = new Post(null, sdf.parse("01/03/2021"), "Dia especial!", "Até comprei presente olha aí. :)", new AuthorDTO(vini));
+		
 		postRepository.saveAll(Arrays.asList(post1, post2));
 		
 	}
